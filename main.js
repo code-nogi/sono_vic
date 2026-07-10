@@ -77,12 +77,13 @@ phoneIcon.addEventListener("mouseover", (event) => {
 const submitButton = document.querySelector("form .submit-button");
 const form = document.querySelector(".contact-form");
 const items = document.querySelectorAll(".form-item");
+const noticeModal = document.querySelector(".notice-modal");
+const noticeParagraph = document.querySelector(".notice-modal p.message");
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
   if (Array.from(items).every((item) => item.checkValidity())) {
-    form.submit();
-    form.reset();
+    sendEmail();
   } else {
     let invalidItems = Array.from(items).filter(
       (item) => !item.checkValidity(),
@@ -107,6 +108,33 @@ submitButton.addEventListener("click", (event) => {
   }
 });
 
+const sendEmail = async () => {
+  const formData = new FormData(form);
+  let emailObject = {};
+  for (const [key, value] of formData) {
+    emailObject[key] = value.trim();
+  }
+  if (emailObject.phone) return;
+  emailObject.site = "sonovic";
+  try {
+    const response = await fetch("https://hunmetdataapi.hu/contact/siteemail", {
+      method: "POST",
+      body: JSON.stringify(emailObject),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) throw new Error();
+    const data = await response.json();
+    if (data.status !== "success") throw new Error();
+    noticeParagraph.textContent = "Üzenetét megkaptuk, hamarosan válaszolunk!";
+    noticeModal.showModal();
+  } catch (error) {
+    noticeParagraph.textContent = `Az üzenet elküldése nem sikerült. Kérjük, próbálja meg később!`;
+    noticeModal.showModal();
+  } finally {
+    form.reset();
+  }
+};
+
 /* ----------------------------- */
 /* COOKIE MODAL vezérlése        */
 /* ----------------------------- */
@@ -119,11 +147,11 @@ window.addEventListener("load", (event) => {
 /* ----------------------------- */
 /* NOTICE MODAL vezérlése        */
 /* ----------------------------- */
-const noticeModal = document.querySelector(".notice-modal");
+/* const noticeModal = document.querySelector(".notice-modal"); */
 
-window.addEventListener("load", (event) => {
+/* window.addEventListener("load", (event) => {
   noticeModal.showModal();
-});
+}); */
 
 /* ----------------------------- */
 /* VACATION MODAL vezérlése        */

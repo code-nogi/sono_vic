@@ -34,7 +34,7 @@
         </p>
       </form>
     </dialog>
-    <!-- <dialog class="notice-modal basic-element-design">
+    <dialog class="notice-modal basic-element-design">
       <form method="dialog">
         <button>
           <img
@@ -42,13 +42,13 @@
             alt="Értesítés ablak bezárása"
           />
         </button>
-        <p class="highlighted">Tisztelt Pácienseink!</p>
-        <p>
+        <p class="highlighted">Tisztelt Páciensünk!</p>
+        <p class="message">
           2026. március 01-jétől emeljük vizsgálati díjainkat. Az új díjakat
           megtalálják a RÓLUNK menüpont Vizsgálati díjaink részben.
         </p>
       </form>
-    </dialog> -->
+    </dialog>
     <!--     <dialog class="vacation-modal basic-element-design">
       <form method="dialog">
         <button>
@@ -1566,26 +1566,14 @@ c11 -12 10 -52 -8 -222 -26 -245 -27 -262 -7 -262 8 0 53 9 100 20 47 11 91
         <article class="basic-element-design">
           <h2>KAPCSOLAT</h2>
           <h3>Vegye fel velünk a kapcsolatot:</h3>
-          <form
-            action="https://formsubmit.co/464432ee6aa2d64677bb1446dd10f333"
-            method="POST"
-            class="contact-form"
-          >
-            <input type="hidden" name="_captcha" value="true" />
-            <input
-              type="hidden"
-              name="_subject"
-              value="Új Üzenet a SONO-VIC-nak!!!"
-            />
-            <input type="hidden" name="_cc" value="piratosnogi@gmail.com" />
-            <input type="hidden" name="_template" value="table" />
+          <form class="contact-form">
             <div class="input-box">
               <div class="input-field field">
                 <input
                   type="text"
                   placeholder="Teljes Név"
                   class="form-item name-field"
-                  name="Teljes&nbsp;név"
+                  name="name"
                   autocomplete="off"
                   required
                 />
@@ -1596,7 +1584,7 @@ c11 -12 10 -52 -8 -222 -26 -245 -27 -262 -7 -262 8 0 53 9 100 20 47 11 91
                   type="email"
                   placeholder="Email-cím"
                   class="form-item email-field"
-                  name="Email-cím"
+                  name="email"
                   autocomplete="off"
                   pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
                   required
@@ -1610,7 +1598,7 @@ c11 -12 10 -52 -8 -222 -26 -245 -27 -262 -7 -262 8 0 53 9 100 20 47 11 91
             <div class="textarea-field field">
               <textarea
                 class="form-item"
-                name="Üzenet&nbsp;szövege"
+                name="message"
                 cols="30"
                 rows="10"
                 autocomplete="off"
